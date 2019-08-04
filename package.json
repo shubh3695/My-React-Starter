@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "start": "concurrently \"npm run dev-build\" && \"npm run serve\"",
+    "start": "concurrently \"npm run dev-build\"  \"npm run serve\"",
     "dev-build": "webpack -w --mode development",
     "serve": "http-server ./dist -c-1 -s -o -p4200",
     "build": "webpack --mode production"
