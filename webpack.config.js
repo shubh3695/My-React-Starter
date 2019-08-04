@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
-
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   entry: "./src/index.js",
   mode: "development",
@@ -21,14 +22,16 @@ module.exports = {
   resolve: { extensions: ["*", ".js", ".jsx"] },
   output: {
     path: path.resolve(__dirname, "dist/"),
-    publicPath: "/dist/",
-    filename: "bundle.js"
+    filename: "main_bundle.js"
   },
-  devServer: {
-    contentBase: path.join(__dirname, "public/"),
-    port: 3000,
-    publicPath: "http://localhost:3000/dist/",
-    hotOnly: true
-  },
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  plugins: [
+    new CleanWebpackPlugin({
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      title : 'React Starter',
+      filename : 'index.html',
+      template: 'index.html', 
+      hash : true
+    })]
 };
