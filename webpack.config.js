@@ -1,7 +1,8 @@
 const path = require("path");
 const webpack = require("webpack");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   entry: "./src/index.js",
   mode: "development",
@@ -25,6 +26,8 @@ module.exports = {
     filename: "main_bundle.js"
   },
   plugins: [
+    
+    new webpack.ProgressPlugin(),
     new CleanWebpackPlugin({
     }),
     new webpack.HotModuleReplacementPlugin(),
@@ -33,5 +36,12 @@ module.exports = {
       filename : 'index.html',
       template: 'index.html', 
       hash : true
-    })]
+    })],
+    optimization: {
+      minimizer: [new TerserPlugin({
+        test: /\.js(\?.*)?$/i,
+        parallel: true,
+        extractComments: 'all'
+      })],
+    }
 };

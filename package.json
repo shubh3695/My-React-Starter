@@ -4,8 +4,9 @@
   "description": "",
   "private": true,
   "scripts": {
-    "start": "webpack -w --mode development",
-    "serve": "http-server ./dist -c-1 -s -p4200",
+    "start": "concurrently \"npm run dev-build\" && \"npm run serve\"",
+    "dev-build": "webpack -w --mode development",
+    "serve": "http-server ./dist -c-1 -s -o -p4200",
     "build": "webpack --mode production"
   },
   "author": "Shubham Saxena",
@@ -21,11 +22,14 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
+    "concurrently": "^4.1.1",
     "css-loader": "^1.0.1",
     "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.9.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "terser-webpack-plugin": "^1.4.1",
     "webpack": "^4.36.1",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
